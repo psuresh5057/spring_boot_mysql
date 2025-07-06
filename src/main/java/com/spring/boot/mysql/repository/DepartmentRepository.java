@@ -1,4 +1,4 @@
-package com.spring.boot.mysql.dao;
+package com.spring.boot.mysql.repository;
 
 import com.spring.boot.mysql.model.Department;
 import org.springframework.data.jpa.repository.JpaRepository;

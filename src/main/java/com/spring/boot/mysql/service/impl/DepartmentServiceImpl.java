@@ -1,6 +1,6 @@
 package com.spring.boot.mysql.service.impl;
 
-import com.spring.boot.mysql.dao.DepartmentRepository;
+import com.spring.boot.mysql.repository.DepartmentRepository;
 import com.spring.boot.mysql.model.Department;
 import com.spring.boot.mysql.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;

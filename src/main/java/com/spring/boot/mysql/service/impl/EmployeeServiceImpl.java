@@ -1,6 +1,6 @@
 package com.spring.boot.mysql.service.impl;
 
-import com.spring.boot.mysql.dao.EmployeeRepository;
+import com.spring.boot.mysql.repository.EmployeeRepository;
 import com.spring.boot.mysql.model.Department;
 import com.spring.boot.mysql.model.Employee;
 import com.spring.boot.mysql.service.DepartmentService;
