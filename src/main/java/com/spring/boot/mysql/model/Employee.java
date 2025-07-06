@@ -21,8 +21,6 @@ public class Employee {
     private String dateOfBirth;
     @Column(name = "hire_date")
     private String hiredate;
-    @Column(name = "job_title")
-    private String jobTitle;
     @Column(name = "salary")
     private double salary;
     @Column(name = "email")
@@ -34,5 +32,9 @@ public class Employee {
     @ManyToOne
     @JoinColumn(name = "department_id", nullable = false)
     private Department department;
+    @ManyToOne
+    @JoinColumn(name = "job_title_id", nullable = true)
+    private JobTitle jobTitle;
+
 }
 

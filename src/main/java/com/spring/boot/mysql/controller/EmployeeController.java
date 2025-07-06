@@ -24,11 +24,27 @@ public class EmployeeController {
         return ResponseEntity.status(HttpStatus.CREATED).body(status);
     }
 
-
     @PostMapping(value = "/update")
-    public ResponseEntity<String> updateEmployee(@Valid @RequestBody Employee employee) {
-        String status = employeeService.updateEmployee(employee);
+    public ResponseEntity<String> updateEmployee(@Valid @RequestBody List<Employee> employeeList) {
+        String status = employeeService.updateEmployee(employeeList);
         return ResponseEntity.ok(status);
     }
 
+    @GetMapping(value = "/get_employees_by_department_id/{departmentId}")
+    public ResponseEntity<List<Employee>> getEmployeesListBasedOnDepartmentId(@PathVariable Integer departmentId) {
+        List<Employee> employeeList = employeeService.getEmployeesListBasedOnDepartmentId(departmentId);
+        if (employeeList.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+        return ResponseEntity.ok(employeeList);
+    }
+
+    @GetMapping(value = "/get_all_employees")
+    public ResponseEntity<List<Employee>> getAllEmployees() {
+        List<Employee> employeeList = employeeService.getAllEmployees();
+        if (employeeList.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+        return ResponseEntity.ok(employeeList);
+    }
 }

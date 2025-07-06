@@ -7,8 +7,8 @@ import java.util.List;
 
 public interface EmployeeService {
 
-    public String saveEmployee(@Valid List<Employee> employee);
-
-
-    String updateEmployee(Employee employee);
+    public String saveEmployee( List<Employee> employee);
+    String updateEmployee(List<Employee> employee);
+    List<Employee> getEmployeesListBasedOnDepartmentId(Integer departmentId);
+    List<Employee> getAllEmployees();
 }

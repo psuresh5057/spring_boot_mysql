@@ -1,10 +1,12 @@
 package com.spring.boot.mysql.service.impl;
 
+import com.spring.boot.mysql.model.JobTitle;
 import com.spring.boot.mysql.repository.EmployeeRepository;
 import com.spring.boot.mysql.model.Department;
 import com.spring.boot.mysql.model.Employee;
 import com.spring.boot.mysql.service.DepartmentService;
 import com.spring.boot.mysql.service.EmployeeService;
+import com.spring.boot.mysql.service.JobTitleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +20,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Autowired
     private DepartmentService departmentService;
+
+    @Autowired
+    private JobTitleService jobTitleService;
 
     @Override
     public String saveEmployee(List<Employee> employee) {
@@ -39,9 +44,11 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public String updateEmployee(Employee employee) {
+    public String updateEmployee(List<Employee> employeeList) {
         String status = "Employee updated successfully";
         try {
+            employeeList.forEach(employee -> {
+
             Employee existingEmployee = employeeRepository.findById(employee.getEmployeeId())
                     .orElseThrow(() -> new RuntimeException("Employee not found with id: " + employee.getEmployeeId()));
             existingEmployee.setFirstName(employee.getFirstName());
@@ -49,7 +56,11 @@ public class EmployeeServiceImpl implements EmployeeService {
             existingEmployee.setGender(employee.getGender());
             existingEmployee.setHiredate(employee.getHiredate());
             existingEmployee.setDateOfBirth(employee.getDateOfBirth());
-            existingEmployee.setJobTitle(employee.getJobTitle());
+            JobTitle jobTitle =jobTitleService.getJobById(employee.getJobTitle().getJobTitleId());
+            if(jobTitle == null) {
+                throw new RuntimeException("Job Title not found with id: " + employee.getJobTitle().getJobTitleId());
+            }
+            existingEmployee.setJobTitle(jobTitle);
             existingEmployee.setSalary(employee.getSalary());
             existingEmployee.setPhoneNumber(employee.getPhoneNumber());
             existingEmployee.setEmail(employee.getEmail());
@@ -60,9 +71,24 @@ public class EmployeeServiceImpl implements EmployeeService {
             }
             existingEmployee.setDepartment(department);
             employeeRepository.save(existingEmployee);
+            });
         } catch (Exception e) {
             status = "Error updating employee: " + e.getMessage();
         }
         return status;
+    }
+
+    @Override
+    public List<Employee> getEmployeesListBasedOnDepartmentId(Integer departmentId) {
+        List<Employee> employees = employeeRepository.findEmployeesByDepartmentId(departmentId);
+        if (employees.isEmpty()) {
+            throw new RuntimeException("No employees found for department id: " + departmentId);
+        }
+        return employees;
+    }
+
+    @Override
+    public List<Employee> getAllEmployees() {
+        return employeeRepository.findAll();
     }
 }
