@@ -1,4 +1,4 @@
-package com.spring.boot.mysql.spring_boot_mysql;
+package com.spring.boot.mysql;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

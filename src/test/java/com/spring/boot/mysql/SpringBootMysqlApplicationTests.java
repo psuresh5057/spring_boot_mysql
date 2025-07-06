@@ -1,4 +1,4 @@
-package com.spring.boot.mysql.spring_boot_mysql;
+package com.spring.boot.mysql;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
