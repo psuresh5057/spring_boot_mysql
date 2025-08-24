@@ -31,6 +31,7 @@ class DepartmentServiceImplTest {
     @Test
     void testSaveDepartment_success() {
         List<Department> departments = Arrays.asList(new Department(), new Department());
+        when(departmentRepository.saveAll(anyList())).thenReturn(departments);
         String result = departmentService.saveDepartment(departments);
         assertEquals("Department saved successfully", result);
     }

@@ -46,6 +46,7 @@ class EmployeeServiceImplTest {
         List<Employee> employees = Collections.singletonList(employee);
         when(departmentService.getDepartmentById(1)).thenReturn(department);
         when(jobTitleService.getJobById(1)).thenReturn(jobTitle);
+        when(employeeRepository.saveAll(anyList())).thenReturn(employees);
         String result = employeeService.saveEmployee(employees);
         assertEquals("Employee(s) saved successfully", result);
     }
@@ -64,20 +65,19 @@ class EmployeeServiceImplTest {
 
     @Test
     void testUpdateEmployee_success() {
-        JobTitle jobTitle = new JobTitle();
-        jobTitle.setJobTitleId(1);
-        Department department = new Department();
-        department.setDepartmentId(1);
         Employee employee = new Employee();
         employee.setEmployeeId(1);
-        employee.setJobTitle(jobTitle);
+        Department department = new Department();
+        department.setDepartmentId(1);
+        JobTitle jobTitle = new JobTitle();
+        jobTitle.setJobTitleId(1);
         employee.setDepartment(department);
+        employee.setJobTitle(jobTitle);
         List<Employee> employees = Collections.singletonList(employee);
-        Employee existingEmployee = new Employee();
-        existingEmployee.setEmployeeId(1);
-        when(employeeRepository.findById(1)).thenReturn(Optional.of(existingEmployee));
-        when(jobTitleService.getJobById(1)).thenReturn(jobTitle);
+        when(employeeRepository.findById(1)).thenReturn(Optional.of(employee));
         when(departmentService.getDepartmentById(1)).thenReturn(department);
+        when(jobTitleService.getJobById(1)).thenReturn(jobTitle);
+        when(employeeRepository.save(any(Employee.class))).thenReturn(employee);
         String result = employeeService.updateEmployee(employees);
         assertEquals("Employee updated successfully", result);
     }
