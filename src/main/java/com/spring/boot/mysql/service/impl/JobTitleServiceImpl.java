@@ -7,10 +7,15 @@ import com.spring.boot.mysql.service.JobTitleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.List;
 
 @Service
 public class JobTitleServiceImpl implements JobTitleService {
+
+    private static final Logger logger = LoggerFactory.getLogger(JobTitleServiceImpl.class);
 
     @Autowired
     private JobTitleRepository jobTitleRepository;
@@ -42,4 +47,11 @@ public class JobTitleServiceImpl implements JobTitleService {
         return jobTitleRepository.getJobTitleByName(jobTitleName)
                 .orElseThrow(() -> new RuntimeException("Job Title not found with name: " + jobTitleName));
     }
+
+    @Override
+    public List<JobTitle> getJobNamesByIds(List<Integer> jobIds) {
+        logger.info("Fetching job names for jobIds: {}", jobIds);
+        return jobTitleRepository.findAllById(jobIds);
+    }
+
 }

@@ -9,5 +9,5 @@ public interface JobTitleService {
    JobTitle getJobById(Integer jobId);
    List<JobTitle> getAllJobTitles();
    JobTitle getJobTitleByName(String jobTitleName);
+   List<JobTitle> getJobNamesByIds(List<Integer> jobIds);
 }
-

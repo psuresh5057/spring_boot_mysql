@@ -2,7 +2,6 @@ package com.spring.boot.mysql.controller;
 
 import com.spring.boot.mysql.model.Department;
 import com.spring.boot.mysql.service.DepartmentService;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
