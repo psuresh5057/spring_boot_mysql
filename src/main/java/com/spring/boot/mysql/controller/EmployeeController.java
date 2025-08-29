@@ -21,6 +21,7 @@ public class EmployeeController {
     @PostMapping(value = "/save")
     public ResponseEntity<String> createEmployee(@Valid @RequestBody List<Employee> employee) {
         String status=  employeeService.saveEmployee(employee);
+        System.out.println(employeeService.hashCode());
         return ResponseEntity.status(HttpStatus.CREATED).body(status);
     }
 
@@ -41,6 +42,7 @@ public class EmployeeController {
 
     @GetMapping(value = "/get_all_employees")
     public ResponseEntity<List<Employee>> getAllEmployees() {
+        System.out.println(employeeService.hashCode());
         List<Employee> employeeList = employeeService.getAllEmployees();
         if (employeeList.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
