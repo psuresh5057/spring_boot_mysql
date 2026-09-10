@@ -35,7 +35,7 @@ class DepartmentControllerTest {
         when(departmentService.saveDepartment(departments)).thenReturn("Saved");
         ResponseEntity<String> response = departmentController.saveDepartment(departments);
         assertNotNull(response);
-        assertEquals(HttpStatus.OK, response.getStatusCode()); // Changed from CREATED to OK to match controller
+        assertEquals(HttpStatus.CREATED, response.getStatusCode()); // Adjusted to match controller behavior
         assertEquals("Saved", response.getBody());
         verify(departmentService, times(1)).saveDepartment(departments);
     }

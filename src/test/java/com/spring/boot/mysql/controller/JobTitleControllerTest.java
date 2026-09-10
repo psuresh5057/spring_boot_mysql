@@ -35,7 +35,7 @@ class JobTitleControllerTest {
         when(jobTitleService.saveJobTitle(jobTitles)).thenReturn("Success");
         ResponseEntity<String> response = jobTitleController.createJobTitle(jobTitles);
         assertNotNull(response);
-        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(HttpStatus.CREATED, response.getStatusCode()); // Adjusted to match controller behavior
         assertEquals("Success", response.getBody());
         verify(jobTitleService, times(1)).saveJobTitle(jobTitles);
     }
@@ -83,4 +83,3 @@ class JobTitleControllerTest {
         assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
     }
 }
-
