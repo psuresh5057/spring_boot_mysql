@@ -3,6 +3,7 @@ plugins {
 	id 'org.springframework.boot' version '3.5.3'
 	id 'io.spring.dependency-management' version '1.1.7'
 	id 'org.owasp.dependencycheck' version '12.1.0'
+	id 'org.sonarqube' version '4.3.0.3225'
 }
 
 group = 'com.spring.boot.mysql'
@@ -43,5 +44,4 @@ dependencyCheck {
 	analyzers.nugetconfEnabled = false
 	analyzers.nodeEnabled = false
 	analyzers.retirejs.enabled = false
-	apiKey = 'CFF3C4DB-224D-4E33-9663-17EEFA812770'
 }
